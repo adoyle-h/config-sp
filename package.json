@@ -1,7 +1,7 @@
 {
   "name": "simple-config",
   "version": "0.0.1",
-  "description": "",
+  "description": "A simple, zero-dependence library helps you make a configuration for your library or module.",
   "keywords": [
     "config"
   ],
@@ -14,9 +14,6 @@
     "url": "https://github.com/adoyle-h/simple-config/issues"
   },
   "main": "index.js",
-  "directories": {
-    "test": "test/cases"
-  },
   "scripts": {
     "test": "node test"
   },
