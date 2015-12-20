@@ -1,0 +1,35 @@
+{
+  "name": "simple-config",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": [
+    "config"
+  ],
+  "homepage": "https://github.com/adoyle-h/simple-config",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adoyle-h/simple-config.git"
+  },
+  "bugs": {
+    "url": "https://github.com/adoyle-h/simple-config/issues"
+  },
+  "main": "index.js",
+  "directories": {
+    "test": "test/cases"
+  },
+  "scripts": {
+    "test": "node test"
+  },
+  "engines": {
+    "node": "^0.12.8"
+  },
+  "author": "ADoyle",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-license": "^1.0.0",
+    "minimist": "^1.2.0",
+    "mocha": "^2.3.4",
+    "should": "^8.0.2"
+  }
+}
