@@ -109,5 +109,21 @@ describe('#get', function() {
                 get.call(obj, []);
             });
         });
+
+        it('child object should have `get` method, and it can get child value', function() {
+            var result = get.call(obj, 'a');
+            result.should.deepEqual({
+                b: 2,
+                c: null,
+            });
+            result.get.should.be.an.Function();
+            result.get('b').should.equal(2);
+            should(result.get('c')).equal(null);
+        });
+
+        it('leaf value should have not `get` method', function() {
+            var result = get.call(obj, 'a.b');
+            should(result.get).equal(undefined);
+        });
     });
 });
