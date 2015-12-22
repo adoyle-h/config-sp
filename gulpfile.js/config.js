@@ -18,6 +18,9 @@ var config = {
         },
 
         release: {
+            changelog: {
+                name: 'ChangeLog.md',
+            },
             license: {
                 src: [
                     'src/**/*', 'index.js', 'package.json', 'README.md',
@@ -40,12 +43,16 @@ var config = {
                 src: './release',
                 dest: './release',
             },
+            'git-tag': {
+                dest: 'master',  // branch name or commit hash
+            },
         },
 
         lint: {
             src: [
-                '!./node_modules/**',
-                './**/*.js',
+                '**/*.js',
+                '!node_modules/**',
+                '!release/**',
             ],
             // see https://github.com/adametry/gulp-eslint#eslintoptions
             eslintOptions: {
