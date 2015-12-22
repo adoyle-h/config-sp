@@ -100,6 +100,15 @@ You could invoke the `load` function many times. Each returned config is indepen
  * @param  {Array<String>} `relativePaths`  The paths of config files, which relative to `fromPath`. The latter item will overwrite the former recursively.
  * @return {Object}  The final config object.
 
+### create(source[, source2, source3...])
+
+create a config with multi objects.
+
+The latter object will overwrite the former recursively.
+
+ * @param  {Object} source  An config object.
+ * @return {Object}  The final config object.
+
 
 ## Copyright and License
 
