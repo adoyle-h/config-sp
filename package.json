@@ -1,17 +1,17 @@
 {
-  "name": "simple-config",
+  "name": "config-sp",
   "version": "0.0.1",
-  "description": "A simple, zero-dependence library helps you make a configuration for your library or module.",
+  "description": "A simple, zero-dependency library helps you make a configuration for your library or module.",
   "keywords": [
     "config"
   ],
-  "homepage": "https://github.com/adoyle-h/simple-config",
+  "homepage": "https://github.com/adoyle-h/config-sp",
   "repository": {
     "type": "git",
-    "url": "https://github.com/adoyle-h/simple-config.git"
+    "url": "https://github.com/adoyle-h/config-sp.git"
   },
   "bugs": {
-    "url": "https://github.com/adoyle-h/simple-config/issues"
+    "url": "https://github.com/adoyle-h/config-sp/issues"
   },
   "main": "index.js",
   "scripts": {
