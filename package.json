@@ -1,6 +1,6 @@
 {
   "name": "config-sp",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A simple, zero-dependency library helps you make a configuration for your library or module.",
   "keywords": [
     "config"
@@ -18,9 +18,9 @@
     "test": "node test"
   },
   "engines": {
-    "node": "^0.12.8"
+    "node": "^0.12.0"
   },
-  "author": "ADoyle",
+  "author": "ADoyle <adoyle.h@gmail.com>",
   "license": "Apache-2.0",
   "devDependencies": {
     "del": "^2.2.0",
