@@ -1,3 +1,3 @@
 'use strict';
 
-exports.load = require('./src/config').load;
+module.exports = require('./src/config');

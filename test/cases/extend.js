@@ -2,6 +2,7 @@
 
 describe('#extend', function() {
     var extend = require('../../src/extend');
+    var checkout = require('../mocks/checkout');
     var defaultConfig = {
         a: {
             b: {
@@ -35,37 +36,11 @@ describe('#extend', function() {
 
     it('assign to a new object', function() {
         var result = extend({}, defaultConfig, localConfig);
-        result.should.deepEqual({
-            a: {
-                b: {
-                    c: 'bye',
-                    c2: 'world',
-                    c3: 0,
-                },
-                d: [],
-            },
-            e: true,
-            f: null,
-            g: 1,
-            h: null,
-        });
+        result.should.deepEqual(checkout);
     });
 
     it('assign to dest object', function() {
         extend(defaultConfig, localConfig);
-        defaultConfig.should.deepEqual({
-            a: {
-                b: {
-                    c: 'bye',
-                    c2: 'world',
-                    c3: 0,
-                },
-                d: [],
-            },
-            e: true,
-            f: null,
-            g: 1,
-            h: null,
-        });
+        defaultConfig.should.deepEqual(checkout);
     });
 });

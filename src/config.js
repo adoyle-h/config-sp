@@ -14,7 +14,6 @@ function loadFile(path) {
     }
 }
 
-
 /**
  * Load your config files.
  *
@@ -52,3 +51,30 @@ function load(fromPath, relativePaths) {
 }
 
 exports.load = load;
+
+/**
+ * create a config with multi objects.
+ *
+ * The latter object will overwrite the former recursively.
+ *
+ * @param  {Object} source  an config object.
+ * @return {Object}  The final config object.
+ * @function create(source[, source2, source3...])
+ */
+function create() {
+    var args = Array.prototype.slice.call(arguments);
+    var conf = {};
+
+    args.forEach(function(config) {
+        extend(conf, config);
+    });
+
+    if (conf.get === undefined) {
+        bindGetMethod(conf);
+    } else {
+        throw new Error('`get` property cannot be the root key of config');
+    }
+
+    return conf;
+}
+exports.create = create;
