@@ -1,4 +1,5 @@
 !.gitkeep
+release/
 node_modules/
 
 gulpfile.js/config/**
