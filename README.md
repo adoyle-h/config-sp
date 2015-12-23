@@ -1,6 +1,6 @@
-# Simple-Config
+# Config-SP
 
-A simple, zero-dependence library helps you make a configuration for your library or module.
+A simple, zero-dependency library helps you make a configuration for your library or module.
 
 It helps you define a set of default parameters(in `default.js`), and extend them(in `local.js` or others files) recursively.
 
@@ -9,7 +9,7 @@ It is highly recommended to use [lorenwest/node-config](https://github.com/loren
 
 ## Installation
 
-`npm install --save simple-config`
+`npm install --save config-sp`
 
 ## Quick Start
 
@@ -57,7 +57,7 @@ It is highly recommended to use [lorenwest/node-config](https://github.com/loren
 4. edit the index file to indicate the default and local files via `vim config/index.js`.
 
     ```js
-    var Config = require('simple-config');
+    var Config = require('config-sp');
     // the default.js and local.js are relative path to __dirname
     var config = Config.load(__dirname, ['default.js', 'local.js']);
     ```
@@ -98,6 +98,15 @@ You could invoke the `load` function many times. Each returned config is indepen
 
  * @param  {String} `fromPath`  A absolute path to sub-config folder.
  * @param  {Array<String>} `relativePaths`  The paths of config files, which relative to `fromPath`. The latter item will overwrite the former recursively.
+ * @return {Object}  The final config object.
+
+### create(source[, source2, source3...])
+
+create a config with multi objects.
+
+The latter object will overwrite the former recursively.
+
+ * @param  {Object} source  An config object.
  * @return {Object}  The final config object.
 
 
