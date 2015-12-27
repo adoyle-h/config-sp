@@ -23,6 +23,7 @@
   "author": "ADoyle <adoyle.h@gmail.com>",
   "license": "Apache-2.0",
   "devDependencies": {
+    "cz-conventional-changelog": "^1.1.5",
     "del": "^2.2.0",
     "eslint": "^1.10.3",
     "eslint-config-airbnb": "^2.1.1",
@@ -35,5 +36,10 @@
     "mocha": "^2.3.4",
     "run-sequence": "^1.1.5",
     "should": "^8.0.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
