@@ -10,7 +10,18 @@ function loadFile(path) {
         FS.accessSync(path, FS.F_OK | FS.R_OK); // eslint-disable-line no-bitwise
         return require(path);
     } catch (e) {
-        throw e;
+        /* eslint-disable no-console */
+        var env = process.env.CONFIG_SP_LOAD_FILE_MISSING;
+        if (env === 'warn') {
+            console.warn(e.message);
+        } else if (env === 'error') {
+            console.error(e.message);
+        } else if (env === 'ignore') {
+            // do nothing
+        } else {
+            throw e;
+        }
+        return {};
     }
 }
 
