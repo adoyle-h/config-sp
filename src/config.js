@@ -1,5 +1,10 @@
 'use strict';
 
+/**
+ * @class Config
+ * @singleton
+ */
+
 var FS = require('fs');
 var Path = require('path');
 var extend = require('./extend');
@@ -31,18 +36,17 @@ function loadFile(path) {
  * You could invoke the `load` function many times. Each returned config is independent and not affected by each other.
  *
  *     @example
- *
- *     ```js
  *     // Assume that there are two files 'test/config/default.js', 'test/config/local.js',
  *     // and the codes in 'test/config/index.js':
  *     load(__dirname, ['default.js', 'local.js']);
- *     ```
  *
  * @param  {String} fromPath  A absolute path to sub-config folder.
- * @param  {Array<String>} relativePaths  The paths of config files, which relative to `fromPath`.
- *                                        The latter item will overwrite the former recursively.
+ * @param  {String[]} relativePaths  The paths of config files, which relative to `fromPath`.
+ *                                   The latter item will overwrite the former recursively.
  * @return {Object}  The final config object.
- * @function load(fromPath, relativePaths)
+ * @throws Throw an error if the files of relativePaths are missing.
+ *         You could set `CONFIG_SP_LOAD_FILE_MISSING` environment variable for toleration
+ * @method load
  */
 function load(fromPath, relativePaths) {
     var conf = {};
@@ -68,9 +72,12 @@ exports.load = load;
  *
  * The latter object will overwrite the former recursively.
  *
- * @param  {Object} source  an config object.
+ *     @example
+ *     create({a: 1, b: 2}, {a: 0, c: 3});  // => {a: 0, b: 2, c: 3}
+ *
+ * @param  {Object...} source  a set of config objects.
  * @return {Object}  The final config object.
- * @function create(source[, source2, source3...])
+ * @method create
  */
 function create() {
     var args = Array.prototype.slice.call(arguments);
