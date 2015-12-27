@@ -3,6 +3,7 @@
         "mocha": true,
     },
     "globals": {
-        TEST_ROOT: false
+        "TEST_ROOT": false,
+        "sinon": false,
     },
 }

@@ -1,6 +1,6 @@
 {
   "name": "config-sp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A simple, zero-dependency library helps you make a configuration for your library or module.",
   "keywords": [
     "config"
@@ -23,6 +23,7 @@
   "author": "ADoyle <adoyle.h@gmail.com>",
   "license": "Apache-2.0",
   "devDependencies": {
+    "cz-conventional-changelog": "^1.1.5",
     "del": "^2.2.0",
     "eslint": "^1.10.3",
     "eslint-config-airbnb": "^2.1.1",
@@ -34,6 +35,13 @@
     "minimist": "^1.2.0",
     "mocha": "^2.3.4",
     "run-sequence": "^1.1.5",
-    "should": "^8.0.2"
+    "should": "^8.0.2",
+    "should-sinon": "0.0.3",
+    "sinon": "^1.17.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

@@ -2,7 +2,7 @@
 
 /**
  * @param  {Object}  gulp    The gulp object
- * @param  {Object}  config  The configuration for gulp tasks. To get a property using `config.a.b.c` or `config.get('a.b.c')`
+ * @param  {Object}  config  The configuration for gulp tasks. To get a property using `config.a.b.c`
  * @param  {Object}  LL      Lazy required libraries and other data
  * @param  {Object}  args    The parsed arguments from comment line
  */
@@ -54,11 +54,10 @@ module.exports = function(gulp, config, LL, args) {  // eslint-disable-line no-u
         var util = LL.nodeUtil;
         var packageJSON = LL.packageJSON;
 
-        var tag = packageJSON.version;
         var dest = Path.resolve(conf.dest);
         var destFile = util.format('%s/%s.tgz', dest, packageJSON.name);
 
-        var command = util.format('npm publish --tag %s --access public %s', tag, destFile);
+        var command = util.format('npm publish --access public %s', destFile);
 
         CP.exec(command, done);
     });
@@ -75,19 +74,34 @@ module.exports = function(gulp, config, LL, args) {  // eslint-disable-line no-u
         CP.exec(command, done);
     });
 
-    gulp.task('release:changelog', function(done) {
+    gulp.task('release:changelog:touch', function(done) {
+        var name = config.tasks.release.changelog.name;
+        LL.CP.exec('touch ' + name, done);
+    });
+
+    gulp.task('release:changelog', ['release:changelog:touch'], function(done) {
         var CP = LL.CP;
         var util = LL.nodeUtil;
-        var conf = config.tasks.release.changelog;
-        var name = conf.name;
+        var changelog = LL.changelog;
+        var name = config.tasks.release.changelog.name;
 
-        var command = util.format('touch %s', name);
-        CP.exec(command, function(err) {
-            if (err) return done(err);
-
-            var command2 = util.format('git add %s && git commit -m "update %s" --no-edit', name, name);
-            CP.exec(command2, done);
-        });
+        gulp.src(name, {
+            buffer: false,
+        })
+            .pipe(changelog({
+                preset: 'angular',
+            }))
+            .pipe(gulp.dest('./'))
+            .on('end', function() {
+                var packageJSON = LL.reload('packageJSON');
+                var tag = packageJSON.version;
+                var command = util.format('\
+                    git add %s && \
+                    git commit -m "update version to %s" --no-edit \
+                ', name, tag);
+                CP.exec(command, done);
+            })
+            .on('error', done);
     });
 
     /**
@@ -100,7 +114,6 @@ module.exports = function(gulp, config, LL, args) {  // eslint-disable-line no-u
     gulp.task('release:bump', function(done) {
         var Path = LL.Path;
         var CP = LL.CP;
-        var util = LL.nodeUtil;
 
         var bumpOpts = {
             key: 'version',
@@ -120,15 +133,9 @@ module.exports = function(gulp, config, LL, args) {  // eslint-disable-line no-u
             .pipe(LL.bump(bumpOpts))
             .pipe(gulp.dest('./'))
             .on('end', function() {
-                var packageJSON = LL.packageJSON;
-                var tag = packageJSON.version;
-
-                var command = util.format('\
-                    git add package.json && \
-                    git commit -m "version to %s" --no-edit \
-                ', tag);
-                CP.exec(command, done);
-            });
+                CP.exec('git add package.json', done);
+            })
+            .on('error', done);
     });
 
     gulp.task('release:branch', function(done) {
@@ -147,10 +154,9 @@ module.exports = function(gulp, config, LL, args) {  // eslint-disable-line no-u
     gulp.task('release:tag', function(done) {
         var CP = LL.CP;
         var util = LL.nodeUtil;
-        var packageJSON = LL.packageJSON;
+        var packageJSON = LL.reload('packageJSON');
         var tag = packageJSON.version;
-        var conf = config.tasks.release['git-tag'];
-        var commitHash = conf.dest;
+        var commitHash = config.tasks.release['git-tag'].dest;
 
         var command = util.format('git tag -a v%s %s -m "release version %s"', tag, commitHash, tag);
         CP.exec(command, done);
@@ -161,6 +167,7 @@ module.exports = function(gulp, config, LL, args) {  // eslint-disable-line no-u
         var command = '\
             git push origin develop && \
             git push origin master && \
+            git push origin release && \
             git push --tags \
         ';
         CP.exec(command, done);
@@ -171,8 +178,8 @@ module.exports = function(gulp, config, LL, args) {  // eslint-disable-line no-u
             'lint',
             'test',
             'release:pre',
-            'release:changelog',
             'release:bump',
+            'release:changelog',
             'release:branch',
             'release:tag',
             'release:push',

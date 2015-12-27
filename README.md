@@ -87,6 +87,17 @@ the following configuration names cannot be used as config key:
 
 - get
 
+## Environment Variables
+
+### `CONFIG_SP_LOAD_FILE_MISSING`
+
+supported values:
+
+- 'warn': `console.warn` the error message
+- 'error': `console.error` the error message
+- 'ignore': neither print anything nor throw an error
+
+otherwise, it will throw an error when the file is missing.
 
 ## API
 
@@ -97,7 +108,7 @@ Load your config files.
 You could invoke the `load` function many times. Each returned config is independent and not affected by each other.
 
  * @param  {String} `fromPath`  A absolute path to sub-config folder.
- * @param  {Array<String>} `relativePaths`  The paths of config files, which relative to `fromPath`. The latter item will overwrite the former recursively.
+ * @param  {String[]} `relativePaths`  The paths of config files, which relative to `fromPath`. The latter item will overwrite the former recursively.
  * @return {Object}  The final config object.
 
 ### create(source[, source2, source3...])
