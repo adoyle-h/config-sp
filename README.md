@@ -60,26 +60,43 @@ It is highly recommended to use [lorenwest/node-config](https://github.com/loren
     var Config = require('config-sp');
     // the default.js and local.js are relative path to __dirname
     var config = Config.load(__dirname, ['default.js', 'local.js']);
+
+    // the config will be:
+    // {
+    //     a: {
+    //         b: {
+    //             c: 'bye',
+    //             c2: 'world',
+    //             c3: 0,
+    //         },
+    //         d: [],
+    //     },
+    //     e: true,
+    //     f: null,
+    //     g: 1,
+    //     h: null,
+    // }
+
+    // to get a child config
+    var c = config.get('a.b.c');
+    // or
+    c = config.a.b.c;
+
+    var a = config.get('a');
+    // the child config returned by `get` method, will also have `get` method
+    c = a.get('b.c');
+
+    var b = config.a.b;
+    // c = b.get('c');  will throw an error, because `b` has no `get` method
+
+    // var d = config.get('d');  // it will throw an error, because `d` is missing
     ```
 
-    and `config` will be:
+## Config Object
 
-    ```js
-    {
-        a: {
-            b: {
-                c: 'bye',
-                c2: 'world',
-                c3: 0,
-            },
-            d: [],
-        },
-        e: true,
-        f: null,
-        g: 1,
-        h: null,
-    }
-    ```
+The config object returned by `load` and `create` function will have `get` method, which is used to get a child config.
+
+`get` method will throw an exception for undefined value to help catch typos and missing values.
 
 ## Reserved Words
 
@@ -120,6 +137,13 @@ The latter object will overwrite the former recursively.
  * @param  {Object} source  An config object.
  * @return {Object}  The final config object.
 
+### get(path)
+
+Gets the property value at path of config.
+If the resolved value is undefined, it will throw an error.
+
+ * @param  {String} path
+ * @return {*}
 
 ## Copyright and License
 
