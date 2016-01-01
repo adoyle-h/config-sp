@@ -145,9 +145,17 @@ If the resolved value is undefined, it will throw an error.
  * @param  {String} path
  * @return {*}
 
+## Versioning
+
+The versioning follows the rules of SemVer 2.0.0.
+
+**BUT**, anything may have **BREAKING CHANGES** at **ANY TIME** when major version is zero (0.y.z), which is for initial development and the public API should not be considered stable.
+
+For more information on SemVer, please visit http://semver.org/.
+
 ## Copyright and License
 
-Copyright 2015 ADoyle
+Copyright 2015-2016 ADoyle
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
