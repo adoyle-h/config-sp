@@ -6,6 +6,9 @@ It helps you define a set of default parameters(in `default.js`), and extend the
 
 It is highly recommended to use [lorenwest/node-config](https://github.com/lorenwest/node-config) when you are willing to build an application rather than a library. It is a pretty awesome library and provides many useful features.
 
+## Document Translations
+
+[简体中文](./doc/README.zh-Hans.md)
 
 ## Installation
 
@@ -37,7 +40,7 @@ It is highly recommended to use [lorenwest/node-config](https://github.com/loren
     }
     ```
 
-3. edit the default configuration via `vim config/local.js`.
+3. edit the local configuration via `vim config/local.js`.
 
     ```js
     {
@@ -87,7 +90,7 @@ It is highly recommended to use [lorenwest/node-config](https://github.com/loren
     c = a.get('b.c');
 
     var b = config.a.b;
-    // c = b.get('c');  will throw an error, because `b` has no `get` method
+    // c = b.get('c');  // will throw an error, because `b` has no `get` method
 
     // var d = config.get('d');  // it will throw an error, because `d` is missing
     ```
@@ -114,36 +117,11 @@ supported values:
 - 'error': `console.error` the error message
 - 'ignore': neither print anything nor throw an error
 
-otherwise, it will throw an error when the file is missing.
+If `CONFIG_SP_LOAD_FILE_MISSING` is not set, it will throw an error when the file is missing.
 
 ## API
 
-### load(fromPath, relativePaths)
-
-Load your config files.
-
-You could invoke the `load` function many times. Each returned config is independent and not affected by each other.
-
- * @param  {String} `fromPath`  A absolute path to sub-config folder.
- * @param  {String[]} `relativePaths`  The paths of config files, which relative to `fromPath`. The latter item will overwrite the former recursively.
- * @return {Object}  The final config object.
-
-### create(source[, source2, source3...])
-
-create a config with multi objects.
-
-The latter object will overwrite the former recursively.
-
- * @param  {Object} source  An config object.
- * @return {Object}  The final config object.
-
-### get(path)
-
-Gets the property value at path of config.
-If the resolved value is undefined, it will throw an error.
-
- * @param  {String} path
- * @return {*}
+see http://adoyle.me/config-sp/
 
 ## Versioning
 
