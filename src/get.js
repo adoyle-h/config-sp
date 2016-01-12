@@ -1,9 +1,16 @@
 'use strict';
 
+/**
+ * @class Get
+ * @singleton
+ */
+
 var isPlainObject = require('./isPlainObject');
 
 /**
  * refer to node_modules/lodash/internal/baseGet.js
+ *
+ * @private
  */
 function baseGet(object, pathArray) {
     pathArray.forEach(function(path) {
@@ -18,13 +25,25 @@ function baseGet(object, pathArray) {
     return object;
 }
 
-/** Used to match property names within property paths. */
+/**
+ * Used to match property names within property paths.
+ *
+ * @private
+ * @type {RegExp}
+ */
 var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\n\\]|\\.)*?)\2)\]/g;
-/** Used to match backslashes in property paths. */
+/**
+ * Used to match backslashes in property paths.
+ *
+ * @private
+ * @type {RegExp}
+ */
 var reEscapeChar = /\\(\\)?/g;
 
 /**
  * refer to node_modules/lodash/internal/toPath.js
+ *
+ * @private
  */
 function getPathArray(path) {
     var pathArray = [];
@@ -40,7 +59,7 @@ function getPathArray(path) {
  *
  * @param  {String} path
  * @return {*}
- * @function get(path)
+ * @method get
  */
 function get(path) {
     var conf = this;

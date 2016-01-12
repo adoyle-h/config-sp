@@ -7,29 +7,25 @@
 [![Code Climate][Code Climate Image]][Code Climate Link]
 [![Test Coverage][Test Coverage Image]][Test Coverage Link]
 
-A simple, zero-dependency library helps you make a configuration for your library or module.
+一个简单的，零依赖的类库。用来帮助你为类库或者模块管理自身的配置。
 
-It helps you define a set of default parameters(in `default.js`), and extend them(in `local.js` or others files) recursively.
+它将帮助你定义一系列默认配置（如在 `default.js` 中），然后递归地扩展默认配置（比如在 `local.js` 或者其他文件中）。
 
-It is highly recommended to use [lorenwest/node-config](https://github.com/lorenwest/node-config) when you are willing to build an application rather than a library. It is a pretty awesome library and provides many useful features.
+当你想要开发一个应用，而不是类库时，强烈推荐你使用 [lorenwest/node-config](https://github.com/lorenwest/node-config)。这是一个非常赞的类库，它提供了许多有用的功能。
 
-## Document Translations
-
-[简体中文](./doc/README.zh-Hans.md)
-
-## Installation
+## 安装（Installation）
 
 `npm install --save config-sp`
 
-## Quick Start
+## 快速上手（Quick Start）
 
-1. mkdir a folder.
+1. 创建一个目录。
 
     ```bash
     mkdir config
     ```
 
-2. edit the default configuration via `vim config/default.js`.
+2. 编辑默认配置，如 `vim config/default.js`。
 
     ```js
     {
@@ -47,7 +43,7 @@ It is highly recommended to use [lorenwest/node-config](https://github.com/loren
     }
     ```
 
-3. edit the local configuration via `vim config/local.js`.
+3. 编辑本地配置，如 `vim config/local.js`。
 
     ```js
     {
@@ -64,14 +60,14 @@ It is highly recommended to use [lorenwest/node-config](https://github.com/loren
     }
     ```
 
-4. edit the index file to indicate the default and local files via `vim config/index.js`.
+4. 编辑主文件，来指示默认配置和本地配置的位置，如 `vim config/index.js`.
 
     ```js
     var Config = require('config-sp');
-    // the default.js and local.js are relative path to __dirname
+    // default.js 和 local.js 是相对与 __dirname 的路径。
     var config = Config.load(__dirname, ['default.js', 'local.js']);
 
-    // the config will be:
+    // config 将会是这样：
     // {
     //     a: {
     //         b: {
@@ -87,58 +83,58 @@ It is highly recommended to use [lorenwest/node-config](https://github.com/loren
     //     h: null,
     // }
 
-    // to get a child config
+    // 获取子配置的值
     var c = config.get('a.b.c');
-    // or
+    // 或者这样
     c = config.a.b.c;
 
     var a = config.get('a');
-    // the child config returned by `get` method, will also have `get` method
+    // 通过 `get` 方法返回的子配置，同样带有 `get` 方法
     c = a.get('b.c');
 
     var b = config.a.b;
-    // c = b.get('c');  // will throw an error, because `b` has no `get` method
+    // c = b.get('c');  // 这将会抛错，因为 `b` 没有 `get` 方法
 
-    // var d = config.get('d');  // it will throw an error, because `d` is missing
+    // var d = config.get('d');  // 这将会抛错，因为 `d` 的值是 `undefined`
     ```
 
-## Config Object
+## Config 对象
 
-The config object returned by `load` and `create` function will have `get` method, which is used to get a child config.
+`load` 以及 `create` 函数将返回一个 Config 对象，它将带有 `get` 方法，可以用来获取子配置的值。
 
-`get` method will throw an exception for undefined value to help catch typos and missing values.
+当使用 `get` 方法查询到的值为 `undefined`，它将抛出异常，用来帮助捕捉打字错误以及字段缺失。
 
-## Reserved Words
+## 保留字（Reserved Words）
 
-the following configuration names cannot be used as config key:
+以下名称不能作为配置的键（key）：
 
 - get
 
-## Environment Variables
+## 环境变量
 
 ### `CONFIG_SP_LOAD_FILE_MISSING`
 
-supported values:
+支持以下值：
 
-- 'warn': `console.warn` the error message
-- 'error': `console.error` the error message
-- 'ignore': neither print anything nor throw an error
+- 'warn': 以 `console.warn` 打印错误信息
+- 'error': 以 `console.error` 打印错误信息
+- 'ignore': 既不打印错误信息，也不抛出错误
 
-If `CONFIG_SP_LOAD_FILE_MISSING` is not set, it will throw an error when the file is missing.
+如果没有设置 `CONFIG_SP_LOAD_FILE_MISSING`，加载文件缺失时将抛出错误。
 
 ## API
 
-see http://adoyle.me/config-sp/
+请看 http://adoyle.me/Ero.js/
 
-## Versioning
+## 版本（Versioning）
 
-The versioning follows the rules of SemVer 2.0.0.
+版本迭代遵循 SemVer 2.0.0 的规则。
 
-**BUT**, anything may have **BREAKING CHANGES** at **ANY TIME** when major version is zero (0.y.z), which is for initial development and the public API should not be considered stable.
+*但是*，当主版本号是零（0.y.z），一切*随时*都可能有*不兼容的修改*。这处于开发初始阶段，其公共 API 是不稳定的。
 
-For more information on SemVer, please visit http://semver.org/.
+关于 SemVer 的更多信息，请访问 http://semver.org/。
 
-## Copyright and License
+## 版权声明（Copyright and License）
 
 Copyright 2015-2016 ADoyle
 

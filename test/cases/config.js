@@ -24,7 +24,7 @@ describe('#config', function() {
             should.throws(function() {
                 Config.load(configDir, ['default.js', 'missing.js']);
             }, function(e) {
-                return (e.message.indexOf('ENOENT, no such file or directory') === 0);
+                return (e.message.indexOf('no such file or directory') !== -1);
             });
         });
 
