@@ -67,11 +67,22 @@ module.exports = function(gulp, config, LL, args) {  // eslint-disable-line no-u
     gulp.task('release:pre', function(done) {
         var CP = LL.CP;
 
+        var rebaseDest;
+        var commit = args.c || args.commit;
+        var branch = args.branch;
+        if (commit) {
+            rebaseDest = commit;
+        } else if (branch) {
+            rebaseDest = branch;
+        } else {
+            rebaseDest = 'HEAD';
+        }
+
         var command = '\
             git add . && \
             git stash save "stash for release" && \
             git fetch --prune && \
-            git rebase origin/develop release \
+            git rebase ' + rebaseDest + ' release \
         ';
         CP.exec(command, done);
     });
@@ -173,6 +184,28 @@ module.exports = function(gulp, config, LL, args) {  // eslint-disable-line no-u
             git push --tags \
         ';
         CP.exec(command, done);
+    });
+
+    gulp.task('release:doc', ['doc:api', 'clean:gh-pages'], function(done) {
+        var command = '\
+            cp -rp doc/api/ gh-pages && \
+            cd gh-pages && \
+            git add . && \
+        ';
+        if (args.a || args.amend) {
+            command += '\
+                git commit --amend --no-edit && \
+                git push -f && \
+            ';
+        } else {
+            command += '\
+                git commit -m "update docs" && \
+                git push && \
+            ';
+        }
+        command += 'cd -';
+        LL.CP.exec(command, done);
+        LL.CP.exec(command, done);
     });
 
     gulp.task('release:code', function(done) {
