@@ -1,4 +1,11 @@
 # Config-SP
+![Node Version][Node Version Image]
+[![Npm Package Version][Npm Package Version Image]][Npm Package Version LINK]
+[![License][License Image]][License LINK]
+![NodeJS Package Dependencies][NodeJS Package Dependencies Link]
+[![Build Status][Build Status Image]][Build Status Link]
+[![Code Climate][Code Climate Image]][Code Climate Link]
+[![Test Coverage][Test Coverage Image]][Test Coverage Link]
 
 一个简单的，零依赖的类库。用来帮助你为类库或者模块管理自身的配置。
 
@@ -140,3 +147,19 @@ Unless required by applicable law or agreed to in writing, software distributed 
 See the License for the specific language governing permissions and limitations under the License.
 
 See the NOTICE file distributed with this work for additional information regarding copyright ownership.
+
+
+<!-- links -->
+
+[Node Version Image]: https://img.shields.io/node/v/config-sp.svg
+[Npm Package Version Image]: https://img.shields.io/npm/v/config-sp.svg
+[Npm Package Version LINK]: https://www.npmjs.com/package/config-sp
+[License Image]: https://img.shields.io/npm/l/config-sp.svg
+[License LINK]: https://github.com/adoyle-h/config-sp/blob/master/LICENSE
+[NodeJS Package Dependencies Link]: https://david-dm.org/adoyle-h/config-sp.svg
+[Build Status Image]: https://travis-ci.org/adoyle-h/config-sp.svg?branch=master
+[Build Status Link]: https://travis-ci.org/adoyle-h/config-sp
+[Code Climate Image]: https://codeclimate.com/github/adoyle-h/config-sp/badges/gpa.svg
+[Code Climate Link]: https://codeclimate.com/github/adoyle-h/config-sp
+[Test Coverage Image]: https://codeclimate.com/github/adoyle-h/config-sp/badges/coverage.svg
+[Test Coverage Link]: https://codeclimate.com/github/adoyle-h/config-sp/coverage
