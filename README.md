@@ -17,10 +17,29 @@ It is highly recommended to use [lorenwest/node-config](https://github.com/loren
 
 [简体中文](./doc/README.zh-Hans.md)
 
+## TOC
+
+<!-- MarkdownTOC -->
+
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [Config Object](#config-object)
+- [Reserved Words](#reserved-words)
+- [Environment Variables](#environment-variables)
+    - [`CONFIG_SP_LOAD_FILE_MISSING`](#config_sp_load_file_missing)
+- [API](#api)
+- [Versioning](#versioning)
+- [Copyright and License](#copyright-and-license)
+
+<!-- /MarkdownTOC -->
+
+
+<a name="installation"></a>
 ## Installation
 
 `npm install --save config-sp`
 
+<a name="quick-start"></a>
 ## Quick Start
 
 1. mkdir a folder.
@@ -102,20 +121,24 @@ It is highly recommended to use [lorenwest/node-config](https://github.com/loren
     // var d = config.get('d');  // it will throw an error, because `d` is missing
     ```
 
+<a name="config-object"></a>
 ## Config Object
 
 The config object returned by `load` and `create` function will have `get` method, which is used to get a child config.
 
 `get` method will throw an exception for undefined value to help catch typos and missing values.
 
+<a name="reserved-words"></a>
 ## Reserved Words
 
 the following configuration names cannot be used as config key:
 
 - get
 
+<a name="environment-variables"></a>
 ## Environment Variables
 
+<a name="config_sp_load_file_missing"></a>
 ### `CONFIG_SP_LOAD_FILE_MISSING`
 
 supported values:
@@ -126,10 +149,12 @@ supported values:
 
 If `CONFIG_SP_LOAD_FILE_MISSING` is not set, it will throw an error when the file is missing.
 
+<a name="api"></a>
 ## API
 
 see http://adoyle.me/config-sp/
 
+<a name="versioning"></a>
 ## Versioning
 
 The versioning follows the rules of SemVer 2.0.0.
@@ -138,6 +163,7 @@ The versioning follows the rules of SemVer 2.0.0.
 
 For more information on SemVer, please visit http://semver.org/.
 
+<a name="copyright-and-license"></a>
 ## Copyright and License
 
 Copyright (c) 2015-2016 ADoyle. The project is licensed under the **Apache License Version 2.0**.
