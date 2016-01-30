@@ -14,8 +14,8 @@ module.exports = function(gulp, config, LL, args) {  // eslint-disable-line no-u
 
         var matches = conf.matches;
         var author = conf.author;
+        var sinceYear = conf.sinceYear;
         var defaultLicense = conf.license;
-        var year = conf.year;
 
         var stream = gulp.src(conf.src, conf.srcOpts);
 
@@ -23,7 +23,7 @@ module.exports = function(gulp, config, LL, args) {  // eslint-disable-line no-u
             var f = filter(matchObj.glob, {restore: true});
             stream = stream.pipe(f)
                 .pipe(license(matchObj.license || defaultLicense, {
-                    year: matchObj.year || year,
+                    sinceYear: matchObj.sinceYear || sinceYear,
                     organization: matchObj.author || author,
                 }))
                 .pipe(f.restore);
