@@ -30,8 +30,7 @@ describe('#config', function() {
 
         describe('CONFIG_SP_LOAD_FILE_MISSING', function() {
             /* eslint-disable no-console */
-            var warn;
-            var error;
+            var warn, error;
             before(function() {
                 warn = console.warn;
                 error = console.error;

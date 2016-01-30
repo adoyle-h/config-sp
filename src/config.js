@@ -11,12 +11,13 @@ var extend = require('./extend');
 var bindGetMethod = require('./get').bindGetMethod;
 
 function loadFile(path) {
+    var env;
     try {
         FS.accessSync(path, FS.F_OK | FS.R_OK); // eslint-disable-line no-bitwise
         return require(path);
-    } catch (e) {
+    } catch(e) {
         /* eslint-disable no-console */
-        var env = process.env.CONFIG_SP_LOAD_FILE_MISSING;
+        env = process.env.CONFIG_SP_LOAD_FILE_MISSING;
         if (env === 'warn') {
             console.warn(e.message);
         } else if (env === 'error') {
