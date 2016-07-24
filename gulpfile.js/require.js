@@ -16,7 +16,7 @@ module.exports = {
     changed: 'gulp-changed',
     eslint: 'gulp-eslint',
     cached: 'gulp-cached',
-    license: 'gulp-license',
+    license: 'a-gulp-license',
     filter: 'gulp-filter',
     changelog: 'gulp-conventional-changelog',
 
