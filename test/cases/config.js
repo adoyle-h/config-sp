@@ -28,10 +28,27 @@ describe('#config', function() {
             });
         });
 
+        describe('opts.ignores', function() {
+            it('ignore missing files', function() {
+                var config = Config.load(configDir, ['default.js', 'local.js', 'missing.js'], {
+                    ignores: 'missing.js',
+                });
+                config.get.should.be.a.Function();
+                config.should.deepEqual(checkout);
+            });
+
+            it('ignore missing files', function() {
+                var config = Config.load(configDir, ['default.js', 'local.js', 'missing.js'], {
+                    ignores: ['missing.js'],
+                });
+                config.get.should.be.a.Function();
+                config.should.deepEqual(checkout);
+            });
+        });
+
         describe('CONFIG_SP_LOAD_FILE_MISSING', function() {
             /* eslint-disable no-console */
-            var warn;
-            var error;
+            var warn, error;
             before(function() {
                 warn = console.warn;
                 error = console.error;

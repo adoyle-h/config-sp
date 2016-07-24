@@ -6,4 +6,7 @@
         "TEST_ROOT": false,
         "sinon": false,
     },
+    "rules": {
+        "max-len": 1,
+    }
 }

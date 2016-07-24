@@ -7,7 +7,6 @@
  * @param  {Object}  args    The parsed arguments from comment line
  */
 module.exports = function(gulp, config, LL, args) {  // eslint-disable-line no-unused-vars
-
     gulp.task('clean:release', function() {
         var del = LL.del;
         return del(config.tasks.release.license.dest);

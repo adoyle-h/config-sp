@@ -8,10 +8,11 @@ function _extend(dest, src) {
     }
 
     var keys = Object.keys(src);
-    for (var i = 0; i < keys.length; i++) {
-        var key = keys[i];
-        var srcVal = src[key];
-        var destVal = dest[key];
+    var i, key, srcVal, destVal;
+    for (i = 0; i < keys.length; i++) {
+        key = keys[i];
+        srcVal = src[key];
+        destVal = dest[key];
         if (isPlainObject(srcVal)) {
             if (isPlainObject(destVal)) {
                 _extend(destVal, srcVal);

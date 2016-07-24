@@ -13,10 +13,29 @@
 
 当你想要开发一个应用，而不是类库时，强烈推荐你使用 [lorenwest/node-config](https://github.com/lorenwest/node-config)。这是一个非常赞的类库，它提供了许多有用的功能。
 
+## TOC
+
+<!-- MarkdownTOC -->
+
+- [安装（Installation）](#安装（installation）)
+- [快速上手（Quick Start）](#快速上手（quick-start）)
+- [Config 对象](#config-对象)
+- [保留字（Reserved Words）](#保留字（reserved-words）)
+- [环境变量](#环境变量)
+    - [`CONFIG_SP_LOAD_FILE_MISSING`](#config_sp_load_file_missing)
+- [API](#api)
+- [版本（Versioning）](#版本（versioning）)
+- [版权声明（Copyright and License）](#版权声明（copyright-and-license）)
+
+<!-- /MarkdownTOC -->
+
+
+<a name="安装（installation）"></a>
 ## 安装（Installation）
 
 `npm install --save config-sp`
 
+<a name="快速上手（quick-start）"></a>
 ## 快速上手（Quick Start）
 
 1. 创建一个目录。
@@ -65,7 +84,9 @@
     ```js
     var Config = require('config-sp');
     // default.js 和 local.js 是相对与 __dirname 的路径。
-    var config = Config.load(__dirname, ['default.js', 'local.js']);
+    var config = Config.load(__dirname, ['default.js', 'local.js'], {
+        ignores: 'local.js',   // local.js 允许不存在
+    });
 
     // config 将会是这样：
     // {
@@ -98,20 +119,24 @@
     // var d = config.get('d');  // 这将会抛错，因为 `d` 的值是 `undefined`
     ```
 
+<a name="config-对象"></a>
 ## Config 对象
 
 `load` 以及 `create` 函数将返回一个 Config 对象，它将带有 `get` 方法，可以用来获取子配置的值。
 
 当使用 `get` 方法查询到的值为 `undefined`，它将抛出异常，用来帮助捕捉打字错误以及字段缺失。
 
+<a name="保留字（reserved-words）"></a>
 ## 保留字（Reserved Words）
 
 以下名称不能作为配置的键（key）：
 
 - get
 
+<a name="环境变量"></a>
 ## 环境变量
 
+<a name="config_sp_load_file_missing"></a>
 ### `CONFIG_SP_LOAD_FILE_MISSING`
 
 支持以下值：
@@ -122,10 +147,12 @@
 
 如果没有设置 `CONFIG_SP_LOAD_FILE_MISSING`，加载文件缺失时将抛出错误。
 
+<a name="api"></a>
 ## API
 
 请看 http://adoyle.me/Ero.js/
 
+<a name="版本（versioning）"></a>
 ## 版本（Versioning）
 
 版本迭代遵循 SemVer 2.0.0 的规则。
@@ -134,19 +161,20 @@
 
 关于 SemVer 的更多信息，请访问 http://semver.org/。
 
+<a name="版权声明（copyright-and-license）"></a>
 ## 版权声明（Copyright and License）
 
-Copyright 2015-2016 ADoyle
+Copyright (c) 2015-2016 ADoyle. The project is licensed under the **Apache License Version 2.0**.
 
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+See the [LICENSE][] file for the specific language governing permissions and limitations under the License.
 
-   http://www.apache.org/licenses/LICENSE-2.0
+See the [NOTICE][] file distributed with this work for additional information regarding copyright ownership.
 
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and limitations under the License.
 
-See the NOTICE file distributed with this work for additional information regarding copyright ownership.
+<!-- Links -->
+
+[LICENSE]: ./LICENSE
+[NOTICE]: ./NOTICE
 
 
 <!-- links -->
