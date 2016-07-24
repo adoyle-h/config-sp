@@ -88,7 +88,9 @@ It is highly recommended to use [lorenwest/node-config](https://github.com/loren
     ```js
     var Config = require('config-sp');
     // the default.js and local.js are relative path to __dirname
-    var config = Config.load(__dirname, ['default.js', 'local.js']);
+    var config = Config.load(__dirname, ['default.js', 'local.js'], {
+        ignores: 'local.js',   // local.js is allowed to be missing
+    });
 
     // the config will be:
     // {

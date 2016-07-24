@@ -5,17 +5,32 @@
  * @singleton
  */
 
+var util = require('util');
 var FS = require('fs');
 var Path = require('path');
 var extend = require('./extend');
 var bindGetMethod = require('./get').bindGetMethod;
 
-function loadFile(path) {
-    var env;
+var S_IRUSR = 256;
+function isReadableFile(stat) {
+    // eslint-disable-next-line no-bitwise
+    return Boolean(stat.mode & S_IRUSR);
+}
+
+function loadFile(path, ignores) {
+    var env, stat;
+    var fileName = Path.basename(path);
     try {
-        FS.accessSync(path, FS.F_OK | FS.R_OK); // eslint-disable-line no-bitwise
+        stat = FS.statSync(path); // eslint-disable-line no-bitwise
+        if (!stat.isFile()) throw new Error(util.format('"%s" is not a normal file.'), path);
+        if (!isReadableFile(stat)) throw new Error(util.format('File "%s" is not readable.'), path);
         return require(path);
     } catch(e) {
+        if (e.message && e.message.startsWith('ENOENT: no such file or directory')) {
+            if (ignores.indexOf(fileName) !== -1) {
+                return {};
+            }
+        }
         /* eslint-disable no-console */
         env = process.env.CONFIG_SP_LOAD_FILE_MISSING;
         if (env === 'warn') {
@@ -31,6 +46,8 @@ function loadFile(path) {
     }
 }
 
+var Config = module.exports = {};
+
 /**
  * Load your config files.
  *
@@ -44,16 +61,22 @@ function loadFile(path) {
  * @param  {String} fromPath  A absolute path to sub-config folder.
  * @param  {String[]} relativePaths  The paths of config files, which relative to `fromPath`.
  *                                   The latter item will overwrite the former recursively.
+ * @param  {Object} [opts]
+ * @param  {String|String[]} [opts.ignores] Filenames that allowed missing when loading these files.
  * @return {Object}  The final config object.
  * @throws Throw an error if the files of relativePaths are missing.
  *         You could set `CONFIG_SP_LOAD_FILE_MISSING` environment variable for toleration
  * @method load
  */
-function load(fromPath, relativePaths) {
+function load(fromPath, relativePaths, opts) {
+    opts = opts || {};
+    var ignores = opts.ignores || [];
+    if (typeof ignores === 'string') ignores = [ignores];
+
     var conf = {};
     relativePaths.forEach(function(relativePath) {
         var path = Path.resolve(fromPath, relativePath);
-        var config = loadFile(path);
+        var config = loadFile(path, ignores);
         extend(conf, config);
     });
 
@@ -66,7 +89,7 @@ function load(fromPath, relativePaths) {
     return conf;
 }
 
-exports.load = load;
+Config.load = load;
 
 /**
  * create a config with multi objects.
@@ -96,4 +119,4 @@ function create() {
 
     return conf;
 }
-exports.create = create;
+Config.create = create;

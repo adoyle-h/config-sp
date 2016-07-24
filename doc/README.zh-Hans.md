@@ -84,7 +84,9 @@
     ```js
     var Config = require('config-sp');
     // default.js 和 local.js 是相对与 __dirname 的路径。
-    var config = Config.load(__dirname, ['default.js', 'local.js']);
+    var config = Config.load(__dirname, ['default.js', 'local.js'], {
+        ignores: 'local.js',   // local.js 允许不存在
+    });
 
     // config 将会是这样：
     // {
