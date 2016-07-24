@@ -20,7 +20,7 @@
     "test": "node test"
   },
   "engines": {
-    "node": ">=0.11.0"
+    "node": ">=4.0"
   },
   "author": "ADoyle <adoyle.h@gmail.com>",
   "license": "Apache-2.0",
